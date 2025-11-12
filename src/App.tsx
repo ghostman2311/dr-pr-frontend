@@ -1,32 +1,37 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import "./App.css";
+import { Toaster, toast } from "sonner";
 
 function App() {
   return (
-    <div className="min-h-screen min-w-7xl bg-gray-900 text-white p-10">
-      <h1 className="text-2xl text-center mb-8">PR-DR Automation</h1>
+    <Fragment>
+      <Toaster />
 
-      <div className="grid grid-cols-3 mb-2 border-2 border-gray-400 p-2 rounded bg-gray-800">
-        <div className="text-center font-semibold">PR</div>
-        <div className="text-center font-semibold">DR</div>
-        <div className="text-center font-semibold">Action</div>
+      <div className="min-h-screen min-w-7xl bg-gray-900 text-white p-10">
+        <h1 className="text-2xl text-center mb-8">PR-DR Automation</h1>
+
+        <div className="grid grid-cols-3 mb-2 border-2 border-gray-400 p-2 rounded bg-gray-800">
+          <div className="text-center font-semibold">PR</div>
+          <div className="text-center font-semibold">DR</div>
+          <div className="text-center font-semibold">Action</div>
+        </div>
+        <ServerSection
+          title="Web Server"
+          prLabel="Web Server (10.176.38.144)"
+          drLabel="Web Server (10.176.38.144)"
+        />
+        <ServerSection
+          title="App Server"
+          prLabel="App Server (10.176.38.145)"
+          drLabel="App Server (10.176.38.145)"
+        />
+        <ServerSection
+          title="Database Server"
+          prLabel="Database Server (10.176.38.146)"
+          drLabel="Database Server (10.176.38.147)"
+        />
       </div>
-      <ServerSection
-        title="Web Server"
-        prLabel="Web Server (10.176.38.144)"
-        drLabel="Web Server (10.176.38.144)"
-      />
-      <ServerSection
-        title="App Server"
-        prLabel="App Server (10.176.38.145)"
-        drLabel="App Server (10.176.38.145)"
-      />
-      <ServerSection
-        title="Database Server"
-        prLabel="Database Server (10.176.38.146)"
-        drLabel="Database Server (10.176.38.147)"
-      />
-    </div>
+    </Fragment>
   );
 }
 
@@ -54,12 +59,18 @@ function ServerSection({ title, prLabel, drLabel }: ServerSectionProps) {
 
     // Show logs one by one with delay
     for (let i = 0; i < steps.length; i++) {
-      await new Promise((res) => setTimeout(res, 1000)); // 1 second delay per step
+      await new Promise((res) => setTimeout(res, 1500)); // 1 second delay per step
       setLogs((prev) => [
         ...prev,
         `[${new Date().toLocaleTimeString()}] ${steps[i]}`,
       ]);
     }
+
+    toast("Successfully completed the automation!", {
+      description: `The automation for ${title} has been completed successfully.`,
+      duration: 4000,
+      position: "top-right",
+    });
 
     setIsRunning(false);
   };

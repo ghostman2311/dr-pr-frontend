@@ -78,7 +78,7 @@ function ServerSection({ title, prLabel, drLabel }: ServerSectionProps) {
   return (
     <div className="w-full my-12">
       <div className="flex items-center justify-between mb-2">
-        <h2 className="text-xl font-semibold text-gray-200">{title}</h2>
+        <h2 className="text-xl font-semibold text-gray-200 mb-4">{title}</h2>
       </div>
 
       <div className="grid grid-cols-3 items-center gap-8">

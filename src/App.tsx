@@ -89,7 +89,7 @@ function ServerSection({ title, prLabel, drLabel }: ServerSectionProps) {
             }`}
             disabled={isRunning}
           >
-            {isRunning ? "Running..." : "Run"}
+            {isRunning ? "Running Automation..." : "Run"}
           </button>
         </div>
       </div>
